@@ -1,1 +1,5 @@
-pm2 start yarn --name "frontend" -- run dev
+pm2 start yarn --name "frontend" -- dev
+
+
+
+pm2 start yarn --name "frontend" -- start
