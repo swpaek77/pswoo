@@ -1,8 +1,25 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [products, setProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = async () => {
+    try {
+      const { data } = await axios.get('https://api.pswoo.com/products');
+      setProducts(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,6 +36,10 @@ export default function Home() {
         <p className={styles.description}>
           Get started by editing <code className={styles.code}>pages/index.js</code>
         </p>
+
+        {products.map(res => (
+          <div key={res.id}>{res.ItemCode}</div>
+        ))}
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
