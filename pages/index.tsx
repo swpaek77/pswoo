@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
+  const [values, setValues] = useState<any>({});
 
   useEffect(() => {
     getProducts();
@@ -24,6 +25,27 @@ export default function Home() {
     e.preventDefault();
   };
 
+  const InputChange = (e: any) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  const postContact = async () => {
+    try {
+      console.log(values);
+      const { data } = await axios.post('https://api.pswoo.com/contacts', {
+        email: values.email,
+        content: values.content,
+        // published_at: '2021-07-05T13:13:13.182Z',
+        // created_by: 'string',
+        // updated_by: 'string',
+      });
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -40,6 +62,14 @@ export default function Home() {
           </a>
         </h1>
 
+        <div>승우백의 웹사이트에 오신 것을 환영합니다.</div>
+
+        <div>프론트: JS, React, React Native, Vue.js</div>
+        <div>백엔드: Node.js, C#, Java, Next.js</div>
+        <div>기타: Strapi, WordPress, Figma, ghidra</div>
+        <div>DB: Oracle, SQL Server, MySQL, SQLite</div>
+        <div>포트폴리오: 창고 관리 시스템, 리포트 프로그램, B2B 아이템 주문 어플, CRM 영업사원 어플, 특정 제품 판매 어플</div>
+
         {/* <p className={styles.description}>
           Get started by editing <code className={styles.code}>pages/index.js</code>
         </p> */}
@@ -51,6 +81,21 @@ export default function Home() {
         >
           {products.map((res, idx) => idx < 10 && <div key={res.id}>{res.ItemCode}</div>)}
         </div>
+
+        <div>[문의사항]</div>
+        <div>
+          <label>
+            이메일
+            <input type="email" name="email" value={values.email} onChange={InputChange} />
+          </label>
+        </div>
+        <div>
+          <label>
+            내용
+            <textarea name="content" value={values.content} onChange={InputChange}></textarea>
+          </label>
+        </div>
+        <button onClick={postContact}>전송</button>
 
         {/* <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
