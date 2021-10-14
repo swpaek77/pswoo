@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
+const userTitle = { margin: '5px 10px' };
+
 const container = {
   backgroundColor: '#f5f5f5',
   height: '100vh',
@@ -14,11 +16,17 @@ const contentBox = {
   padding: '5px 10px',
 };
 
+const personalStyle = {
+  display: 'flex',
+  alignItems: 'flex-end',
+  flexDirection: 'column',
+};
+
 export default function mypage() {
   return (
     <div style={container}>
       <div>
-        <h1 style={{ margin: '5px 10px' }}>Seungwoo Paek</h1>
+        <h1 style={userTitle}>Seungwoo Paek</h1>
 
         <div style={contentBox}>최고의 꼼꼼한 Oracle PL/SQL 개발자</div>
         <div style={contentBox}>Microsoft Dynamics ERP 개발자</div>
@@ -30,7 +38,7 @@ export default function mypage() {
         <div style={contentBox}>CRM Salesman App 개발</div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'flex-end', flexDirection: 'column' }}>
+      <div style={personalStyle}>
         <div>백승우</div>
         <div>App Developer</div>
       </div>
