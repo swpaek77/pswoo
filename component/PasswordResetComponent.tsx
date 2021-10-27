@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { translate } from '../languages';
-import { requiredStyle } from '../styles';
+import { LogoutAction } from '../lib/common';
+import { buttonStyle, requiredStyle } from '../styles';
 
 const PasswordResetComponent = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -34,6 +37,9 @@ const PasswordResetComponent = () => {
         <br />
 
         <input type="submit" value="비밀번호 초기화" />
+        <a style={buttonStyle} onClick={() => LogoutAction(dispatch)}>
+          로그아웃
+        </a>
       </form>
     </div>
   );

@@ -2,11 +2,14 @@ import axios from 'axios';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { translate } from '../languages';
+import { LoginInfoRedux } from '../redux/LoginRedux';
 import { requiredStyle } from '../styles';
 
 const LoginComponent = () => {
   const Router = useRouter();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -22,6 +25,7 @@ const LoginComponent = () => {
       });
       console.log(data);
       localStorage.userData = JSON.stringify(data);
+      dispatch(LoginInfoRedux(data));
       Router.push('/');
     } catch (err: any) {
       console.log(err);

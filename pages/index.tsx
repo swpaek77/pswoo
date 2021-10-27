@@ -7,15 +7,28 @@ import { useEffect, useState } from 'react';
 import { buttonStyle } from '../styles';
 import FAQComponent from '../component/FAQComponent';
 import { translate } from '../languages';
-import { StrapiError } from '../lib/common';
+import { LogoutAction, StrapiError } from '../lib/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { LoginInfoRedux } from '../redux/LoginRedux';
 
 export default function Home() {
+  const dispatch = useDispatch();
   const [products, setProducts] = useState<any[]>([]);
   const [contacts, setContacts] = useState<any[]>([]);
+  const loginInfo = useSelector(({ LoginRedux }: any) => LoginRedux.loginInfo);
 
   useEffect(() => {
+    getLoginInfo();
     getProducts();
   }, []);
+
+  const getLoginInfo = async () => {
+    const userData = localStorage.userData;
+
+    if (userData) {
+      dispatch(LoginInfoRedux(JSON.parse(userData)));
+    }
+  };
 
   const getProducts = async () => {
     try {
@@ -77,31 +90,41 @@ export default function Home() {
           <a style={buttonStyle}>자세한 정보 보기</a>
         </Link>
 
-        <Link href="/login">
-          <a style={buttonStyle}>로그인</a>
-        </Link>
+        {Object.keys(loginInfo).length === 0 ? (
+          <>
+            <Link href="/login">
+              <a style={buttonStyle}>로그인</a>
+            </Link>
 
-        <Link href="/register">
-          <a style={buttonStyle}>회원가입</a>
-        </Link>
+            <Link href="/register">
+              <a style={buttonStyle}>회원가입</a>
+            </Link>
+          </>
+        ) : (
+          <>
+            <div>{loginInfo.user.email} 님 환영합니다</div>
+            <Link href="/password-reset">
+              <a style={buttonStyle}>비밀번호 초기화</a>
+            </Link>
 
-        <Link href="/password-reset">
-          <a style={buttonStyle}>비밀번호 초기화</a>
-        </Link>
+            <a style={buttonStyle} onClick={() => LogoutAction(dispatch)}>
+              로그아웃
+            </a>
 
-        <FAQComponent />
-
-        <a style={buttonStyle} onClick={getAuthContacts}>
-          더 자세한 정보 보기
-        </a>
-        {contacts.map(
-          (res, idx) =>
-            idx < 10 && (
-              <div key={res.id}>
-                [{res.email}] {res.content}
-              </div>
-            )
+            <a style={buttonStyle} onClick={getAuthContacts}>
+              더 자세한 정보 보기
+            </a>
+            {contacts.map(
+              (res, idx) =>
+                idx < 10 && (
+                  <div key={res.id}>
+                    [{res.email}] {res.content}
+                  </div>
+                )
+            )}
+          </>
         )}
+        <FAQComponent />
       </main>
     </div>
   );
