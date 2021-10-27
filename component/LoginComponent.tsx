@@ -1,10 +1,12 @@
 import axios from 'axios';
+import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { translate } from '../languages';
 import { requiredStyle } from '../styles';
 
 const LoginComponent = () => {
+  const Router = useRouter();
   const {
     register,
     handleSubmit,
@@ -19,6 +21,8 @@ const LoginComponent = () => {
         identifier: loginInfo.email,
       });
       console.log(data);
+      localStorage.userData = JSON.stringify(data);
+      Router.push('/');
     } catch (err: any) {
       console.log(err);
       alert(translate.ko[err.response.data.data[0].messages[0].id] || '치명적인 오류');

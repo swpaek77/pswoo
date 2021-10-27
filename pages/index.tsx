@@ -6,9 +6,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { buttonStyle } from '../styles';
 import FAQComponent from '../component/FAQComponent';
+import { translate } from '../languages';
+import { StrapiError } from '../lib/common';
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
+  const [contacts, setContacts] = useState<any[]>([]);
 
   useEffect(() => {
     getProducts();
@@ -25,6 +28,23 @@ export default function Home() {
 
   const preventClick = (e: any) => {
     e.preventDefault();
+  };
+
+  const getAuthContacts = async () => {
+    try {
+      const { data } = await axios.get('https://api.pswoo.com/contacts', {
+        params: {
+          _sort: 'created_at:DESC',
+        },
+        headers: {
+          authorization: `Bearer ${JSON.parse(localStorage.userData).jwt}`,
+        },
+      });
+      setContacts(data);
+    } catch (err) {
+      console.log(err);
+      alert(translate.ko[StrapiError(err)] || '치명적인 오류');
+    }
   };
 
   return (
@@ -70,6 +90,18 @@ export default function Home() {
         </Link>
 
         <FAQComponent />
+
+        <a style={buttonStyle} onClick={getAuthContacts}>
+          더 자세한 정보 보기
+        </a>
+        {contacts.map(
+          (res, idx) =>
+            idx < 10 && (
+              <div key={res.id}>
+                [{res.email}] {res.content}
+              </div>
+            )
+        )}
       </main>
     </div>
   );

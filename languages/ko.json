@@ -175,5 +175,6 @@
   "notification.error": "에러가 발생했습니다.",
   "notification.error.layout": "레이아웃을 가져올 수 없습니다.",
   "notification.form.error.fields": "잘못 입력된 필드가 존재합니다.",
-  "request.error.model.unknown": "모델이 없습니다."
+  "request.error.model.unknown": "모델이 없습니다.",
+  "FORBIDDEN_ERROR": "인증 에러"
 }
