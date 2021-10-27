@@ -4,11 +4,11 @@ import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { buttonStyle } from '../styles';
+import FAQComponent from '../component/FAQComponent';
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
-  const [values, setValues] = useState<any>({});
-  const [loading, setLoading] = useState<any>(false);
 
   useEffect(() => {
     getProducts();
@@ -25,30 +25,6 @@ export default function Home() {
 
   const preventClick = (e: any) => {
     e.preventDefault();
-  };
-
-  const InputChange = (e: any) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-
-  const postContact = async () => {
-    try {
-      console.log(values);
-      setLoading(true);
-      const { data } = await axios.post('https://api.pswoo.com/contacts', {
-        email: values.email,
-        content: values.content,
-        // published_at: '2021-07-05T13:13:13.182Z',
-        // created_by: 'string',
-        // updated_by: 'string',
-      });
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
@@ -75,33 +51,25 @@ export default function Home() {
         <div>DB: Oracle, SQL Server, MySQL, SQLite</div>
         <div>포트폴리오: 창고 관리 시스템, 리포트 프로그램, B2B 아이템 주문 어플, CRM 영업사원 어플, 특정 제품 판매 어플</div>
 
-        <div
-          style={{
-            display: 'none',
-          }}
-        >
-          {products.map((res, idx) => idx < 10 && <div key={res.id}>{res.ItemCode}</div>)}
-        </div>
+        <div style={{ display: 'none' }}>{products.map((res, idx) => idx < 10 && <div key={res.id}>{res.ItemCode}</div>)}</div>
 
         <Link href="/mypage">
-          <a style={{ fontSize: 20, padding: '5px 10px', margin: 10, color: 'white', borderRadius: 10, backgroundColor: '#777' }}>자세한 정보 보기</a>
+          <a style={buttonStyle}>자세한 정보 보기</a>
         </Link>
 
-        <div>[문의사항]</div>
-        <div>
-          <label>
-            이메일
-            <input type="email" name="email" value={values.email} onChange={InputChange} />
-          </label>
-        </div>
-        <div>
-          <label>
-            내용
-            <textarea name="content" value={values.content} onChange={InputChange}></textarea>
-          </label>
-        </div>
-        <button onClick={postContact}>전송</button>
-        {loading && <div>전송중...</div>}
+        <Link href="/login">
+          <a style={buttonStyle}>로그인</a>
+        </Link>
+
+        <Link href="/register">
+          <a style={buttonStyle}>회원가입</a>
+        </Link>
+
+        <Link href="/password-reset">
+          <a style={buttonStyle}>비밀번호 초기화</a>
+        </Link>
+
+        <FAQComponent />
       </main>
     </div>
   );
