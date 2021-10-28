@@ -1,8 +1,9 @@
 import PasswordChangeComponent from '../../component/PasswordChangeComponent';
+import { defaultContainer } from '../../styles';
 
 export default function Page() {
   return (
-    <div>
+    <div style={defaultContainer}>
       <PasswordChangeComponent />
     </div>
   );

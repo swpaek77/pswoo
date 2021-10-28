@@ -1,8 +1,9 @@
 import PasswordResetComponent from '../../component/PasswordResetComponent';
+import { defaultContainer } from '../../styles';
 
 export default function Page() {
   return (
-    <div>
+    <div style={defaultContainer}>
       <PasswordResetComponent />
     </div>
   );

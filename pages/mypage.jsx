@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 const userTitle = { margin: '5px 10px' };
 
 const container = {
-  backgroundColor: '#f5f5f5',
+  // backgroundColor: '#f5f5f5',
   height: '100vh',
   display: 'flex',
   justifyContent: 'space-between',
