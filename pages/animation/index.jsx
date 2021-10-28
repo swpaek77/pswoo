@@ -1,32 +1,26 @@
 import React, { useState, useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
-import ReactParticles from 'react-particles-js';
-import particlesConfig from '../../config/particles-config';
 import styles from './styles.module.scss';
 
 export default function Page() {
   return (
     <div className={styles.main}>
-      <Particles>
-        <div style={{ height: 100 }}></div>
-
-        <Hero>
-          <div className={styles.container}>
-            {/* <Info /> */}
-            <div className={styles.row}>
-              {cards.map((card, i) => (
-                <div className={styles.column} key={i}>
-                  <Card>
-                    <div className={styles['card-title']}>{card.title}</div>
-                    <div className={styles['card-body']}>{card.description}</div>
-                    <Image ratio={card.imageRatio} src={card.image} />
-                  </Card>
-                </div>
-              ))}
-            </div>
+      <Hero>
+        <div className={styles.container}>
+          {/* <Info /> */}
+          <div className={styles.row}>
+            {cards.map((card, i) => (
+              <div className={styles.column} key={i}>
+                <Card>
+                  <div className={styles['card-title']}>{card.title}</div>
+                  <div className={styles['card-body']}>{card.description}</div>
+                  <Image ratio={card.imageRatio} src={card.image} />
+                </Card>
+              </div>
+            ))}
           </div>
-        </Hero>
-      </Particles>
+        </div>
+      </Hero>
     </div>
   );
 }
@@ -91,26 +85,6 @@ function Card({ children }) {
     </animated.div>
   );
 }
-
-function Particles({ children }) {
-  return (
-    <div style={{ position: 'relative' }}>
-      <ReactParticles
-        params={particlesConfig}
-        style={{
-          position: 'absolute',
-          zIndex: 1,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          top: 0,
-        }}
-      />
-      {children && <div style={{ position: 'relative' }}>{children}</div>}
-    </div>
-  );
-}
-
 function Hero({ children }) {
   return (
     <div className={styles.hero}>
