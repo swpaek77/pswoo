@@ -116,7 +116,7 @@ function Info() {
   return (
     <div className={styles.info}>
       Springy cards from{' '}
-      <a target="_blank" href="https://bit.ly/382KSdo">
+      <a target="_blank" href="https://bit.ly/382KSdo" rel="noreferrer">
         divjoy.com
       </a>
       <div className={styles.notice}>(best viewed at larger screen width)</div>

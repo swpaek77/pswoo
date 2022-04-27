@@ -39,6 +39,8 @@ const excelExport = async year => {
 
     XLSX.utils.book_append_sheet(wb, ws, `${year} LOFT STUDIO`);
     XLSX.writeFile(wb, `[${year}] LOFT STUDIO.xlsx`);
+    // XLSX.writeFile(wb, `[123] LOFT STUDIO.xlsx`);
+    // XLSX.writeFile(wb, 'out.xlsx');
   } catch (err) {
     alert('치명적인 에러!');
     console.log(err);
