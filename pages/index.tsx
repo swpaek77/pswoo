@@ -81,7 +81,7 @@ export default function Home() {
 
         <Animation />
 
-        <Link href="/flow">Flow 엑셀 추출</Link>
+        <Link href="/loft-studio">엑셀 추출</Link>
       </main>
     </div>
   );
