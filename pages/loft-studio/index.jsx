@@ -9,6 +9,7 @@ import XLSX from 'xlsx-js-style';
 import { loginJotai, startLogout } from '../../jotai';
 import { useAtom } from 'jotai';
 import { buttonStyle } from '../../styles';
+import 'file-saver';
 
 const excelExport = async year => {
   if (!year) {
@@ -96,7 +97,9 @@ export default function LoftStudio() {
 
   return (
     <div className={styles.container}>
-      {Object.keys(isLogin).length === 0 ? (
+      {isLogin.isFirst ? (
+        <></>
+      ) : Object.keys(isLogin).length === 0 ? (
         <>
           <div>로그인이 필요합니다</div>
 
@@ -119,11 +122,17 @@ export default function LoftStudio() {
               ))}
           </select>
 
-          <button onClick={() => excelExport(year)}>엑셀 추출!</button>
+          <button onClick={() => excelExport(year)} style={buttonStyle}>
+            엑셀 추출!
+          </button>
 
           <a style={buttonStyle} onClick={() => startLogout(setIsLogin)}>
             로그아웃
           </a>
+
+          <Link href="/">
+            <a style={buttonStyle}>홈으로</a>
+          </Link>
         </div>
       )}
     </div>
