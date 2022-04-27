@@ -6,8 +6,12 @@ import { useDispatch } from 'react-redux';
 import { translate } from '../languages';
 import { LoginInfoRedux } from '../redux/LoginRedux';
 import { requiredStyle } from '../styles';
+import { useAtom } from 'jotai';
+import { loginJotai } from '../jotai';
 
 const LoginComponent = () => {
+  const [isLogin, setIsLogin] = useAtom(loginJotai);
+
   const Router = useRouter();
   const dispatch = useDispatch();
   const {
@@ -26,6 +30,7 @@ const LoginComponent = () => {
       console.log(data);
       localStorage.userData = JSON.stringify(data);
       dispatch(LoginInfoRedux(data));
+      setIsLogin(data);
       Router.push('/');
     } catch (err: any) {
       console.log(err);

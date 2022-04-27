@@ -13,7 +13,7 @@ export default function Particles({ children }) {
   };
 
   const particlesLoaded = container => {
-    console.log(container);
+    // console.log(container);
   };
 
   return (
