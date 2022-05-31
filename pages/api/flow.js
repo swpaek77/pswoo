@@ -9,14 +9,14 @@ export default async function handler(req, res) {
   try {
     const _JSON_ = encodeURIComponent(
       JSON.stringify({
-        USER_ID: 'kakao_404631800',
-        RGSN_DTTM: 'FLOW_xtbZYsqc%2FseuGlbCS3JYNOwyxBy1QTIh%2FU18tAMKV9BwAbDZcrJCkUIcqfCrBMM3A7dLZwBGk%2BKZ42U28%2BJR7g%3D%3D',
-        USE_INTT_ID: 'KAKAO_170414135901',
+        USER_ID: process.env.USER_ID,
+        RGSN_DTTM: process.env.RGSN_DTTM,
+        USE_INTT_ID: process.env.USE_INTT_ID,
+        COLABO_SRNO: process.env.COLABO_SRNO,
         FIRST_DT: moment(year?.toString()).startOf('year').format('YYYYMMDD'),
         LAST_DT: moment(year?.toString()).endOf('year').format('YYYYMMDD'),
         PROJECT_SCHD_FILTER: '0,1',
         TASK_SCHD_FILTER: '2',
-        COLABO_SRNO: '255217',
       })
     );
 
