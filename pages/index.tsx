@@ -11,11 +11,31 @@ import { LogoutAction, StrapiError } from '../lib/common';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginInfoRedux } from '../redux/LoginRedux';
 import Animation from '../component/Animation';
+import { NotionAPI } from 'notion-client';
+import { NotionRenderer } from 'react-notion-x';
 
+// const notion = new NotionAPI()
+
+// const recordMap = await notion.getPage('067dd719a912471ea9a3ac10710e7fdf')
+
+// export default ({ recordMap }) => (
+//   <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={false} />
+// )
+// const notion = new NotionAPI();
+// let recordMap: any = [];
+// <notion.ExtendedRecordMap>
+// RecordMap
 export default function Home() {
   const preventClick = (e: any) => {
     e.preventDefault();
   };
+  // const getNotion = async () => {
+  //   recordMap = await notion.getPage('067dd719a912471ea9a3ac10710e7fdf');
+  // };
+
+  useEffect(() => {
+    // getNotion();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -36,8 +56,10 @@ export default function Home() {
         <div>승우백의 웹사이트에 오신 것을 환영합니다.</div>
 
         <Animation />
+        {/* <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={false} /> */}
 
-        <Link href="/loft-studio">엑셀 추출</Link>
+        {/* <Link href="/loft-studio">엑셀 추출</Link> */}
+        <Link href="/framer-test">Framer 테스트</Link>
       </main>
     </div>
   );
